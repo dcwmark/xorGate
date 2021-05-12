@@ -1,0 +1,26 @@
+{
+  "name": "xorGate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "start": "parcel index.html --open",
+    "build": "parcel build index.html"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "brain.js": "2.0.0-beta.2",
+    "parcel-bundler": "^1.6.1"
+  },
+  "devDependencies": {
+    "@babel/core": "7.2.0"
+  },
+  "resolutions": {
+    "@babel/preset-env": "7.13.8"
+  },
+  "keywords": [
+    "javascript",
+    "starter"
+  ]
+}
