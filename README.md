@@ -1,0 +1,1 @@
+1st AI from https://github.com/BrainJS/brain.js#brainjs
