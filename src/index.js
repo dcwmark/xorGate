@@ -25,12 +25,39 @@ const testSet = [
   [1, 1],
 ];
 
-const output = testSet.map(each => {
+const neuralNetwork = testSet.map(each => {
   return `${each[0]} XOR ${each[1]} :: ${net.run([each[0], each[1]])}`;
 });
-console.log(output);
+document.getElementById("NeuralNetwork").innerHTML =
+  '<h1>NeuralNetwork</h1>' + neuralNetwork.join('<br/>');
 
-document.getElementById("app").innerHTML = output.join('<br/>');
+const neuralNetworkDiagram = brain.utilities.toSVG(net);
+document.getElementById("NeuralNetworkDiagram").innerHTML = neuralNetworkDiagram;
 
-const diagram = brain.utilities.toSVG(net);
-document.getElementById("diagram").innerHTML = diagram;
+const rnnConf = {
+  inputSize: 20,
+  inputRange: 20,
+  hiddenLayers: [20, 20],
+  outputSize: 20,
+  learningRate: 0.01,
+  decayRate: 0.999,
+};
+
+const rnn = new brain.recurrent.RNN(rnnConf);
+
+rnn.train([
+  { input: [0, 0], output: [0] },
+  { input: [0, 1], output: [1] },
+  { input: [1, 0], output: [1] },
+  { input: [1, 1], output: [0] },
+]);
+
+const rnnNetwork = testSet.map(each => {
+  return `${each[0]} XOR ${each[1]} :: ${rnn.run([each[0], each[1]])}`;
+});
+document.getElementById("RNNNeuralNetwork").innerHTML =
+  '<h1>RNN (Recurrent) NeuralNetwork</h1>' + rnnNetwork.join('<br/>');
+
+const rnnNetworkDiagram = brain.utilities.toSVG(rnn);
+document.getElementById("RNNNeuralNetworkDiagram").innerHTML = rnnNetworkDiagram;
+
