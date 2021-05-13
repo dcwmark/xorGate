@@ -48507,16 +48507,16 @@ require("./style.css");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var config = {
-  binaryThresh: 0.5,
-  hiddenLayers: [3],
-  // array of ints for the sizes of the hidden layers in the network
   activation: 'sigmoid',
   // supported activation types: ['sigmoid', 'relu', 'leaky-relu', 'tanh'],
+  hiddenLayers: [3],
+  // array of ints for the sizes of the hidden layers in the network
+  binaryThresh: 0.5,
   leakyReluAlpha: 0.01 // supported for activation type 'leaky-relu'
 
 };
 var net = new _brain.default.NeuralNetwork(config);
-net.train([{
+var trainingData = [{
   input: [0, 0],
   output: [0]
 }, {
@@ -48528,7 +48528,8 @@ net.train([{
 }, {
   input: [1, 1],
   output: [0]
-}]);
+}];
+net.train(trainingData);
 var testSet = [[0, 0], [0, 1], [1, 0], [1, 1]];
 var neuralNetwork = testSet.map(function (each) {
   return "".concat(each[0], " XOR ").concat(each[1], " :: ").concat(net.run([each[0], each[1]]));
@@ -48547,19 +48548,7 @@ var rnnConf = {
   decayRate: 0.999
 };
 var rnn = new _brain.default.recurrent.RNN(rnnConf);
-rnn.train([{
-  input: [0, 0],
-  output: [0]
-}, {
-  input: [0, 1],
-  output: [1]
-}, {
-  input: [1, 0],
-  output: [1]
-}, {
-  input: [1, 1],
-  output: [0]
-}]);
+rnn.train(trainingData);
 var rnnNetwork = testSet.map(function (each) {
   return "".concat(each[0], " XOR ").concat(each[1], " :: ").concat(rnn.run([each[0], each[1]]));
 });
